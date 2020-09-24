@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool _showMenu;
   int _currentIndex;
+  double _yPosition;
 
   @override
   void initState() {
@@ -22,6 +23,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     double _screenHeight = MediaQuery.of(context).size.height;
+
+    if (_yPosition == null) {
+      _yPosition = _screenHeight * .24;
+    }
     return Scaffold(
       backgroundColor: Colors.purple[800],
       body: Stack(
@@ -36,16 +41,37 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           PageViewApp(
-            top: _screenHeight * .24,
+            top:
+                _yPosition, //!_showMenu ? _screenHeight * .24 : _screenHeight * .75,
             onChanged: (index) {
               setState(() {
                 _currentIndex = index;
               });
             },
+            onPanUpdate: (details) {
+              double positionBottomLimit = _screenHeight * .75;
+              double positionTopLimit = _screenHeight * .24;
+
+              setState(() {
+                _yPosition += details.delta.dy;
+
+                _yPosition = _yPosition < positionTopLimit
+                    ? positionTopLimit
+                    : _yPosition;
+
+                _yPosition = _yPosition > positionBottomLimit
+                    ? positionBottomLimit
+                    : _yPosition;
+
+                if (_yPosition == positionBottomLimit) {
+                  _showMenu = true;
+                } else if (_yPosition == positionTopLimit) {
+                  _showMenu = false;
+                }
+              });
+            },
           ),
-          Positioned(
-              top: _screenHeight * .80,
-              child: MyDotsApp(currentIndex: _currentIndex))
+          MyDotsApp(top: _screenHeight * .80, currentIndex: _currentIndex)
         ],
       ),
     );
