@@ -17,8 +17,8 @@ class MenuApp extends StatelessWidget {
         duration: Duration(milliseconds: 200),
         opacity: showMenu ? 1 : 0,
         child: Container(
-          // color: Colors.red,
-          height: MediaQuery.of(context).size.height * .60,
+          //color: Colors.red,
+          height: MediaQuery.of(context).size.height * .65,
           child: Column(
             children: [
               Container(
@@ -111,7 +111,7 @@ class MenuApp extends StatelessWidget {
                       text: "Configurações do app",
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 15),
+                      margin: EdgeInsets.symmetric(vertical: 25),
                       child: OutlineButton(
                         highlightedBorderColor: Colors.white,
                         padding: EdgeInsets.symmetric(vertical: 15),
