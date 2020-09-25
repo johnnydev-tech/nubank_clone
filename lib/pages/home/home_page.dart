@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nubank_clone/pages/home/widgets/item_menu_bottom.dart';
 import 'package:nubank_clone/pages/home/widgets/menu_app.dart';
 import 'package:nubank_clone/pages/home/widgets/my_app_bar.dart';
 import 'package:nubank_clone/pages/home/widgets/my_dots_app.dart';
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       _yPosition = _screenHeight * .24;
     }
     return Scaffold(
-      backgroundColor: Colors.purple[800],
+      backgroundColor: Colors.purple[700],
       body: Stack(
         alignment: Alignment.topCenter,
         children: [
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
           PageViewApp(
             showMenu: _showMenu,
             top: _yPosition -
-                5, //!_showMenu ? _screenHeight * .24 : _screenHeight * .75,
+                35, //!_showMenu ? _screenHeight * .24 : _screenHeight * .75,
             onChanged: (index) {
               setState(() {
                 _currentIndex = index;
@@ -74,15 +75,16 @@ class _HomePageState extends State<HomePage> {
 
                 if (_yPosition != positionBottomLimit && details.delta.dy > 0) {
                   _yPosition =
-                      _yPosition > positionTopLimit + middlePosition - 50
+                      _yPosition > positionTopLimit + middlePosition - 140
                           ? positionBottomLimit
                           : _yPosition;
                 }
 
                 if (_yPosition != positionTopLimit && details.delta.dy < 0) {
-                  _yPosition = _yPosition < positionBottomLimit - middlePosition
-                      ? positionTopLimit
-                      : _yPosition;
+                  _yPosition =
+                      _yPosition < positionBottomLimit - middlePosition + 90
+                          ? positionTopLimit
+                          : _yPosition;
                 }
 
                 if (_yPosition == positionBottomLimit) {
@@ -95,8 +97,81 @@ class _HomePageState extends State<HomePage> {
           ),
           MyDotsApp(
               showMenu: _showMenu,
-              top: _screenHeight * .74,
-              currentIndex: _currentIndex)
+              top: _screenHeight * .70,
+              currentIndex: _currentIndex),
+          AnimatedPositioned(
+            duration: Duration(milliseconds: 200),
+            bottom: !_showMenu
+                ? 0 + MediaQuery.of(context).padding.bottom + 60
+                : -200,
+            left: 0,
+            right: 0,
+            height: 120,
+            child: Container(
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  SizedBox(
+                    width: 15,
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.person_add,
+                    text: "Indicar Amigos",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.monetization_on,
+                    text: "Pix",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.qr_code_scanner,
+                    text: "Pagar",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.trending_up,
+                    text: "Transferir",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.trending_down,
+                    text: "Depositar",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.phone_android,
+                    text: "Recarga de celuar",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.monetization_on_outlined,
+                    text: "Dividir valor",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.payments,
+                    text: "Cobrar",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.accessibility_new,
+                    text: "Doação",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.tune,
+                    text: "Ajustar Limite",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.lock_open,
+                    text: "Bloquear Cartão",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.payment,
+                    text: "Cartão Virtual",
+                  ),
+                  ItemMenuBottom(
+                    icon: Icons.sort,
+                    text: "Organizar atalhos",
+                    color: Colors.black12,
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

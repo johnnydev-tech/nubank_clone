@@ -25,10 +25,10 @@ class MenuApp extends StatelessWidget {
                 margin: EdgeInsets.only(bottom: 12),
                 padding: EdgeInsets.all(5),
                 color: Colors.white,
-                child: Image.network(
-                  "https://lh3.googleusercontent.com/proxy/zz7cn5nPQEAux97tpwWU1ge81rs5JF2BjixNYVgZTqkxVBfqLmCIkkqb9w-j6nZGykFXdSXrGEKWUKpGnnVm-4z9wpCFxUwTSEiJBM-5LRg2HKgTdsC0qOnq",
+                child: Image.asset(
+                  "assets/images/qrcode.png",
                   height: 85,
-                  color: Colors.purple[800],
+                  color: Colors.purple[700],
                 ),
               ),
               Text.rich(
