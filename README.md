@@ -1,4 +1,4 @@
-# nubank_clone
+# Nubank Clone
 
 Um Projeto Flutter de Clone do Nubank
 
